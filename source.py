@@ -195,7 +195,7 @@ def buyfood():
 
 #=============== ROOMS ===============#
 
-def InMines():
+def InMines(): # Sets interactions available in the mines
     user = ui(1,'You\'re in a dingy mine','There is a merchent and rich veins of ore')
     if user == 'save':
         save()
