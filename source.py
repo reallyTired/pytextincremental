@@ -68,7 +68,7 @@ def save(): # saves players progress
     global food
     statlist = [str(pick), str(gold), str(silver), str(copper), str(money), str(pickcost), str(room), str(Aminers), str(Aminercost), str(tipjar), str(food)]
     accessfile = open('save._rt','w')
-    for i in statlist:
+    for i in range(0,len(statlist)):
         accessfile.write(statlist[i] + '\n')
     accessfile.close()
     
@@ -190,8 +190,10 @@ def buyfood():
     print('Food costs 150 per meal')
     user = input('How many meals do you want to buy? ').lower()
     if money >= 150 * user:
-        
-    
+        money -= 150 * user
+        food += user
+    else:
+        print('You cannot afford this amount of meals')
 
 #=============== ROOMS ===============#
 
@@ -234,7 +236,7 @@ def InTown(): # Sets interactions available in the town
         invalid()
 
 def InShop(): # sets interactions available in the shop
-    user = ui(3,'You\'re inside a small, cozy shop','There is a shop keeper, a pyramid display of big box\'s labelled autominer 6000, shelves stocked with food and a tipjar')
+    user = ui(3,'You\'re inside a small, cozy shop','There is a shop keeper, a pyramid display of big box\'s labelled \'autominer 6000\', shelves stocked with food and a tipjar')
     if user == 'save':
         save()
     elif user == 'quit':
@@ -247,7 +249,7 @@ def InShop(): # sets interactions available in the shop
         tipjar()
     elif user == 'food':
         buyfood()
-    elif user == 'leave' or user == 'town' or user == 'street':
+    elif user == 'leave':
         InTown()
     else:
         invalid()
@@ -258,8 +260,10 @@ def InInn(): # sets interactions available in the inn
         save()
     elif user == 'quit':
         close()
-    elif user == 'bartender'
+    elif user == 'bartender':
         bartender()
+    elif user == 'leave':
+        InTown()
     else:
         invalid()
 
